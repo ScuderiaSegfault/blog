@@ -1,5 +1,11 @@
 default:
   image: ruby:3.2
+  before_script:
+    - gem install bundler
+    - bundle install
+  cache:
+    paths:
+      - vendor/
 
 workflow:
   rules:
@@ -7,7 +13,17 @@ workflow:
 
 create-pages:
   script:
-    - gem install bundler
-    - bundle install
     - bundle exec jekyll build -d public
   pages: true  # specifies that this is a Pages job and publishes the default public directory
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"
+
+test:
+  stage: test
+  script:
+    - bundle exec jekyll build -d test
+  artifacts:
+    paths:
+      - test
+  rules:
+    - if: $CI_COMMIT_BRANCH != "main"
