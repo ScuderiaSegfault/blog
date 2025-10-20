@@ -13,7 +13,7 @@ workflow:
 
 create-pages:
   script:
-    - bundle exec jekyll build -d public
+    - bundle exec jekyll build -d public --drafts
   pages: true  # specifies that this is a Pages job and publishes the default public directory
   rules:
     - if: $CI_COMMIT_BRANCH == "main"
