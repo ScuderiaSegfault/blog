@@ -1,0 +1,120 @@
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>IR NEC Module</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
+    <link href="/assets/css/fontawesome.css" rel="stylesheet" />
+    <link href="/assets/css/brands.css" rel="stylesheet" />
+    <link href="/assets/css/solid.css" rel="stylesheet" />
+</head>
+<body class="w3-white">
+    <main class="w3-content w3-container">
+        <p class="w3-right-align">
+            <a class="w3-btn w3-green" id="connect">
+                <i class="fa-solid fa-link" id="connect_icon"></i>
+                <span id="connect_text">Connect</span>
+            </a>
+        </p>
+        <p>
+            <strong>Team:</strong>
+            <span id="team_name"></span>
+        </p>
+        <p>
+            <strong>Car ID:</strong>
+            <span id="car_id"></span>
+        </p>
+        <p>
+            <label for="unicast_address"><strong>Unicast Address:</strong></label>
+            <select class="w3-select w3-disabled" id="unicast_address"></select>
+        </p>
+        <p>
+            <strong>Multicast Mask:</strong>
+        </p>
+        <div class="w3-row">
+            <div class="w3-col" style="width: 12.5%">
+                <input type="checkbox" id="multicast_mask_00" class="w3-check w3-disabled">
+                <label for="multicast_mask_00">0x00</label>
+            </div>
+            <div class="w3-col" style="width: 12.5%">
+                <input type="checkbox" id="multicast_mask_01" class="w3-check w3-disabled">
+                <label for="multicast_mask_01">0x01</label>
+            </div>
+            <div class="w3-col" style="width: 12.5%">
+                <input type="checkbox" id="multicast_mask_02" class="w3-check w3-disabled">
+                <label for="multicast_mask_02">0x02</label>
+            </div>
+            <div class="w3-col" style="width: 12.5%">
+                <input type="checkbox" id="multicast_mask_03" class="w3-check w3-disabled">
+                <label for="multicast_mask_03">0x03</label>
+            </div>
+            <div class="w3-col" style="width: 12.5%">
+                <input type="checkbox" id="multicast_mask_04" class="w3-check w3-disabled">
+                <label for="multicast_mask_04">0x04</label>
+            </div>
+            <div class="w3-col" style="width: 12.5%">
+                <input type="checkbox" id="multicast_mask_05" class="w3-check w3-disabled">
+                <label for="multicast_mask_05">0x05</label>
+            </div>
+            <div class="w3-col" style="width: 12.5%">
+                <input type="checkbox" id="multicast_mask_06" class="w3-check w3-disabled">
+                <label for="multicast_mask_06">0x06</label>
+            </div>
+            <div class="w3-col" style="width: 12.5%">
+                <input type="checkbox" id="multicast_mask_07" class="w3-check w3-disabled">
+                <label for="multicast_mask_07">0x07</label>
+            </div>
+        </div>
+        <div class="w3-row">
+            <div class="w3-col" style="width: 12.5%">
+                <input type="checkbox" id="multicast_mask_08" class="w3-check w3-disabled">
+                <label for="multicast_mask_08">0x08</label>
+            </div>
+            <div class="w3-col" style="width: 12.5%">
+                <input type="checkbox" id="multicast_mask_09" class="w3-check w3-disabled">
+                <label for="multicast_mask_09">0x09</label>
+            </div>
+            <div class="w3-col" style="width: 12.5%">
+                <input type="checkbox" id="multicast_mask_0A" class="w3-check w3-disabled">
+                <label for="multicast_mask_0A">0x0A</label>
+            </div>
+            <div class="w3-col" style="width: 12.5%">
+                <input type="checkbox" id="multicast_mask_0B" class="w3-check w3-disabled">
+                <label for="multicast_mask_0B">0x0B</label>
+            </div>
+            <div class="w3-col" style="width: 12.5%">
+                <input type="checkbox" id="multicast_mask_0C" class="w3-check w3-disabled">
+                <label for="multicast_mask_0C">0x0C</label>
+            </div>
+            <div class="w3-col" style="width: 12.5%">
+                <input type="checkbox" id="multicast_mask_0D" class="w3-check w3-disabled">
+                <label for="multicast_mask_0D">0x0D</label>
+            </div>
+            <div class="w3-col" style="width: 12.5%">
+                <input type="checkbox" id="multicast_mask_0E" class="w3-check w3-disabled">
+                <label for="multicast_mask_0E">0x0E</label>
+            </div>
+            <div class="w3-col" style="width: 12.5%">
+                <input type="checkbox" id="multicast_mask_0F" class="w3-check w3-disabled">
+                <label for="multicast_mask_0F">0x0F</label>
+            </div>
+        </div>
+        <p class="w3-right-align">
+            <a class="w3-btn w3-text-red" id="clear_log">
+                <i class="fa-solid fa-trash-can"></i>
+                Clear Log
+            </a>
+        </p>
+        <p>
+            <strong>Log:</strong>
+        </p>
+        <pre id="log" style="overflow: auto"></pre>
+    </main>
+
+
+
+    <noscript>This page contains webassembly and javascript content, please enable javascript in your browser.</noscript>
+    <script src="./ir_nec.main.js"></script>
+</body>
+</html>
