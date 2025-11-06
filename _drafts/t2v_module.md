@@ -22,9 +22,7 @@ and, if possible, to indicate slow-driving sections[^1].
 
 To allow for an early roll-out to as many teams as possible, we provide build instructions and software for the
 receivers, based on the ESP32-P4 platform. Teams can find those instructions on GitHub in the repository for the T2V
-Module. We also provide a basic ROS integration and will include a sensible integration for our Ackermann Mux NG. All
-instructions, source code, and designs will be available as open-source projects under MIT or CC0 licenses,
-respectively, after we have finalized the initial versions for each component.
+Module. We also provide a basic ROS integration and will include a sensible integration for our Ackermann Mux NG (our new implementation for the Ackermann Mux, which we will release soon). All instructions, source code, and designs will be available as open-source projects under MIT or CC0 licenses, respectively, after we have finalized the initial versions for each component.
 
 ## The protocol
 
@@ -35,20 +33,19 @@ to transmit. While this is not an issue if all cars use the T2V Module, the star
 transmission time into account when human drivers are involved. The T2V protocol only uses the standard mode for IR NEC
 addressing, not the extended variant.
 
-[^2]: See [https://www.sbprojects.net/knowledge/ir/nec.php](https://www.sbprojects.net/knowledge/ir/nec.php) for more
-details on the IR NEC protocol.
+[^2]: See [https://www.sbprojects.net/knowledge/ir/nec.php](https://www.sbprojects.net/knowledge/ir/nec.php) for more details on the IR NEC protocol.
 
 IR NEC transmits an address and a command in each frame, which the T2V Module also utilizes. Systems using the T2V
 Module protocol MUST use the address only to process frames destined for the system. For this purpose, we define four
 blocks of addresses that require different treatment. The table below defines the different blocks of addresses.
 
-| Start | End  | Name           |
-|-------|------|----------------|
-| `00`  | `0F` | Multicast      |
-| `10`  | `7F` | Race reserved  |
-| `80`  | `EF` | Open addresses |
-| `F0`  | `FE` | RFU            |
-| `FF`  | `FF` | Broadcast      |
+| Start | End  | Name                          |
+|-------|------|-------------------------------|
+| `00`  | `0F` | Multicast                     |
+| `10`  | `7F` | Race reserved                 |
+| `80`  | `EF` | Open addresses                |
+| `F0`  | `FE` | RFU (Reserved for future use) |
+| `FF`  | `FF` | Broadcast                     |
 
 We use **multicast** (`0x00` - `0x0F`) addresses to identify a group of receivers that MUST process a frame, such as all
 cars on one track or all cars in a team. To address all receivers at once, we define the **broadcast** address (`0xFF`).
@@ -98,8 +95,7 @@ For details on extensions and their endpoints, please refer to the documentation
 For configuration, the Reference Receiver uses a Bluetooth Low Energy Interface. The race directors use this interface
 during races to configure the correct addressing. For this purpose, the device provides a BLE GATT service under the
 UUID `c902d400-1809-2a94-904d-af5cbdcefe9b` with the required characteristics to properly configure the receiver. The
-table
-below describes the characteristics and their BLE attributes.
+table below describes the characteristics and their BLE attributes.
 
 | Characteristic | Name            | Attributes  | Description                                                                                      |
 |----------------|-----------------|-------------|--------------------------------------------------------------------------------------------------|
@@ -131,21 +127,16 @@ basic tools for testing.
 
 We drew inspiration from the starting lights used in a slightly larger racing series (about 10 times larger) when
 designing the starting lights. They feature IR senders, as well as five lamps on each side of the starting line to
-indicate the starting process to humans. As mentioned before, the transmission of the IR NEC frame will start and will
+indicate the starting process to humans. As mentioned before, the transmission of the IR NEC frame will
 finish when the starting lights indicate the start of the race.
 
 We propose the following sequence for the starting lights:
 
 1. All lights start dark.
-2. The first light shows red, IR NEC `Ready` is sent.
+2. The first light shows red, IR NEC `START_READY` is sent.
 3. Each second, another light turns red until all lights are red.
-4. IR NEC `Set` is sent.
-5. After another second, all lights turn green, IR NEC `Ready` is sent.
+4. IR NEC `START_SET` is sent.
+5. After another second, all lights turn green, IR NEC `START_GO` is sent.
 
-If the race directors need to abort the start, the lights will flash orange slowly, and IR NEC `Start Abort` is sent. To
-indicate a faulty start, the lights will flash red, and an IR NEC `Stop` is sent.
-
-## Specialized Sender: Use Reference Receiver with PCB
-
-The PCB for the Reference Sender features the option to connect an infrared LED. This connector connects to the same
-pins used on the Reference Sender and allows the reuse of the Reference Receiver's hardware as a sender for testing.
+If the race directors need to abort the start, the lights will flash yellow slowly, and IR NEC `START_ABORT` is sent. To
+indicate a faulty start, the lights will flash red, and an IR NEC `STOP` is sent.
