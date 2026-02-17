@@ -21,11 +21,11 @@
 title: Scuderia Segfault Blog
 email: scuderia-segfault@tuwien.ac.at
 description: >- # this means to ignore newlines until "baseurl:"
-  Here we write about the small and the little things we are working on.
-  Most of the content in this blog is still experimental and should be used on your own risk, but some things might enable you to win races!
+  On this blog write about the small and the little things we are working on.
+  Most of the content in this blog is still experimental and should be used on your own risk, but some things might help you win races!
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://blog-713f1f.git-pages.tuwien.ac.at/" # the base hostname & protocol for your site, e.g. http://example.com
-twitter_username: jekyllrb
+# twitter_username: jekyllrb
 github_username:  ScuderiaSegfault
 
 # Build settings

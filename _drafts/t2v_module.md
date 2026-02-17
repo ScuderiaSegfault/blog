@@ -123,7 +123,7 @@ basic tools for testing.
 
 ## Specialized Sender: Starting Lights
 
-![Render of a draft of starting lights.](/assets/t2v_start_module.png)
+![Render of a draft of starting lights.](/assets/t2v_module/t2v_start_module.png)
 
 We drew inspiration from the starting lights used in a slightly larger racing series (about 10 times larger) when
 designing the starting lights. They feature IR senders, as well as five lamps on each side of the starting line to
