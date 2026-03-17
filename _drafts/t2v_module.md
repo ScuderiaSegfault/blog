@@ -8,9 +8,9 @@ author: Felix Resch <felix.resch@tuwien.ac.at>
 One issue we have encountered in the many races we have participated in is the impact of human reaction time during the
 starting sequence.
 <!--more-->
-While a difference of starting time might have been a minor annoyance a few years ago, today we have incredibly
-competitive teams with lap times only separated by a few hundredths of a second. This minor difference in lap times can
-lead to the human reaction time, which can be a few tenths of a second, to decide the result of a race.
+While a difference in starting time might have been a minor annoyance a few years ago, today we have incredibly
+competitive teams with lap times only separated by a few hundredths of a second. With such a minor difference in lap times,
+the result of the race may come down to human reaction time, which is in the order of a few tenths of a second.
 
 As a mitigation for this problem, we are pleased to announce the new RoboRacer Track to Vehicle Module (T2V Module),
 developed in cooperation with the RoboRacer foundation for the 27th RoboRacer Grand Prix in Vienna. The T2V Module
@@ -35,8 +35,8 @@ addressing, not the extended variant.
 
 [^2]: See [https://www.sbprojects.net/knowledge/ir/nec.php](https://www.sbprojects.net/knowledge/ir/nec.php) for more details on the IR NEC protocol.
 
-IR NEC transmits an address and a command in each frame, which the T2V Module also utilizes. Systems using the T2V
-Module protocol MUST use the address only to process frames destined for the system. For this purpose, we define four
+IR NEC transmits an address and a command in each frame, both of which are utilized by the T2V Module. Systems using the T2V
+Module protocol MUST use the address to process only frames destined for the system. For this purpose, we define four
 blocks of addresses that require different treatment. The table below defines the different blocks of addresses.
 
 | Start | End  | Name                          |
@@ -48,7 +48,8 @@ blocks of addresses that require different treatment. The table below defines th
 | `FF`  | `FF` | Broadcast                     |
 
 We use **multicast** (`0x00` - `0x0F`) addresses to identify a group of receivers that MUST process a frame, such as all
-cars on one track or all cars in a team. To address all receivers at once, we define the **broadcast** address (`0xFF`).
+cars on one track or all cars in a group (e.g. all cars from the same team, or all cars in a training slot). To address
+all receivers at once, we define the **broadcast** address (`0xFF`).
 Any receiver receiving a frame with this address MUST process the frame.
 
 For organizational reasons, we split the unicast addresses into two ranges: the **race reserved** (`0x10` - `0x7F`)
@@ -57,11 +58,11 @@ receiver SHALL use an address in this range unless the race directors have assig
 address freely at any time, but teams SHOULD coordinate the used addresses during a race. Addresses in the range
 `0xF0` - `0xFE` are **reserved for future use**.
 
-Currently, we have defined only the minimal required commands for a starting system. After the Vienna Grand Prix, we
+To date, only the essential commands required for a starting system have been defined. After the Vienna Grand Prix, we
 will develop a standardization process to add additional commands to the standard. A complying device needs to implement
 at least the commands `START_GO`, `START_ABORT`, and `STOP`. The other commands, `START_READY` and `START_SET`, are
-informative, and devices might use them to optimize their starting routine. (e.g., by allowing the controller to press
-the dead-persons switch without the car starting to drive)
+informative, and devices might use them to optimize their starting routine (e.g., by allowing the car's operator to press
+the dead man's switch without the car starting to drive).
 
 | ID          | Name        | Required | Usage                            |
 |-------------|-------------|----------|----------------------------------|
@@ -76,19 +77,19 @@ the dead-persons switch without the car starting to drive)
 ## Reference Receiver
 
 We aim to make the T2V Module accessible to as many teams as possible by providing an affordable and widely available
-reference receiver. To achieve this, we have based the receiver on
+Reference Receiver. To achieve this, we have based the receiver on
 the [ESP32-P4-NANO](https://www.waveshare.com/esp32-p4-nano.htm) from Waveshare, which is internationally available and
 costs less than 20 USD. In the minimum configuration, teams need to purchase an additional IR Receiver, a USB plug with
 a corresponding cable, and a few jumper wires. We also provide a PCB design that includes the USB plug, headers for the
 IR receiver, and headers for some typical low-level protocols, such as I2C, SPI, and one-wire. We will release the build
-instructions in a forthcoming post and the PCB design once it is finalized and tested.
+instructions in a forthcoming post, followed by the PCB design once it has been finalized and tested.
 
-The firmware handles the processing of the IR NEC frames and communication as a USB device. As we intend to extend the
-receiver to read data from temperature sensors and voltage meters, those features will also be available generally when
-we have finished testing them.
+The firmware handles the processing of the IR NEC frames and communication as a USB device. As we intend to expand the
+receiver's functionality to read data from temperature sensors and voltage meters, these features will also be generally
+available when we have finished testing them.
 
 The Reference Receiver uses USB Full-Speed to transfer the IR NEC frames to the car. By default, it uses the vendor ID
-`0x5455` and the product ID `0x1911` and uses a vendor-specific interface with one endpoint. The endpoint with ID 1 is
+`0x5455`, the product ID `0x1911` and a vendor-specific interface with one endpoint. The endpoint with ID 1 is
 an IN Interrupt endpoint that transfers 4 bytes of data (the IR NEC frame) when a frame is received.
 For details on extensions and their endpoints, please refer to the documentation on the extension-specific branches.
 
@@ -107,15 +108,15 @@ table below describes the characteristics and their BLE attributes.
 
 ### Test App
 
-You can test and configure your reference receiver with below.
-This app requires a Chromium-based browser with enabled WebBluetooth API (enable this feature:
+You can test and configure your reference receiver with the app below.
+This app requires a Chromium-based browser with the WebBluetooth API enabled (enable this feature:
 `chrome://flags/#enable-experimental-web-platform-features`) and a bluetooth adapter on the host device.
 
 <iframe src="/apps/ir_nec/" width="100%" height="500px"></iframe>
 
 # Reference Sender
 
-Similar to the reference sender, we have also developed a reference sender for use at the Vienna Grand Prix. It is based
+Similar to the Reference Receiver, we have also developed a Reference Sender for use at the Vienna Grand Prix. It is based
 on the same hardware platform as the receiver, but uses Power over Ethernet for power supply and network connectivity.
 In the first version, it will allow direct commands via UDP and TCP, as well as communication based on Zenoh for
 integration into more complex systems. Once we have finalized the protocols, we will make them available, including some
@@ -125,7 +126,7 @@ basic tools for testing.
 
 ![Render of a draft of starting lights.](/assets/t2v_module/t2v_start_module.png)
 
-We drew inspiration from the starting lights used in a slightly larger racing series (about 10 times larger) when
+We drew inspiration from the starting lights used in a slightly larger racing series (hint: about ten times larger) when
 designing the starting lights. They feature IR senders, as well as five lamps on each side of the starting line to
 indicate the starting process to humans. As mentioned before, the transmission of the IR NEC frame will
 finish when the starting lights indicate the start of the race.
