@@ -62,7 +62,7 @@ To date, only the essential commands required for a starting system have been de
 will develop a standardization process to add additional commands to the standard. A complying device needs to implement
 at least the commands `START_GO`, `START_ABORT`, and `STOP`. The other commands, `START_READY` and `START_SET`, are
 informative, and devices might use them to optimize their starting routine (e.g., by allowing the car's operator to press
-the dead man's (REMARK: Andreas and Jaroslav say this is the only correct term) switch without the car starting to drive).
+the dead man's switch without the car starting to drive).
 
 | ID          | Name        | Required | Usage                            |
 |-------------|-------------|----------|----------------------------------|
