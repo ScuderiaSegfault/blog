@@ -8,8 +8,6 @@ author:
   - Felix Resch <felix.resch@tuwien.ac.at>
 ---
 
-slug: {{ page.slug }}
-
 This project provides all the information on our new radio controllers for the RoboRacer racecars. They have much better connection to the car and allow for greater customization than the old Logitech gamepads. <!--more-->
 A rough structure of the project is:
 
