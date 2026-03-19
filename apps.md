@@ -10,4 +10,4 @@ Please note that all these apps required the use of a Chromium-based browser wit
 
 Currently we provide the following apps:
 
-* [**Reference Receiver Config**](/apps/ir_nec/): Configure the IR NEC reference receiver and verify its operation.
+* [**Reference Receiver Config**]({{ "/apps/ir_nec/" | relative_url }}): Configure the IR NEC reference receiver and verify its operation.
