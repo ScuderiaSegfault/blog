@@ -29,7 +29,7 @@ Radiomaster Pocket ELRS 2.4GHz Controller <-- ELRS Protocol --> any 2.4GHz ELRS 
     * The right shoulder button (green) is used to put the vehicle into acceleration mode: the position of the left gimbal then corresponds to the acceleration of the vehicle (going backwards is not possible in this mode). A green LED indicates that this button is active.
     * The back left momentary switch (red) is the deadman switch for autonomous driving: as long as this switch is held down, the algorithm will drive the car autonomously.
 
-![Explanation of used buttons on the RadioMaster Pocket controller]({{ "/assets/radio_controller/radiomaster_explanation.jpg" | absolute_url }})
+![Explanation of used buttons on the RadioMaster Pocket controller]({{ "/assets/radio_controller/radiomaster_explanation.jpg" | relative_url }})
 
 * The control can be charged via the USB-C port **on the bottom**. The USB-C port on the top is to use the controller as a joystick on a PC (for example, as wired connection to train in flight sims). **Never connect both USB-C ports simultaneously, this will break the controller!**
 * Power-off the remote by pressing and holding the power button until the squares on the display disappear. If the receiver is connected, you will receive a warning which you have to clear by pressing enter via the scroll wheel below the right gimbal.
@@ -55,7 +55,7 @@ Radiomaster Pocket ELRS 2.4GHz Controller <-- ELRS Protocol --> any 2.4GHz ELRS 
 
 ### Radiomaster Pocket Controller
 
-![Location of screws that need modifications]({{ "/assets/radio_controller/left_gimbal_self_centering.png" | absolute_url }})
+![Location of screws that need modifications]({{ "/assets/radio_controller/left_gimbal_self_centering.png" | relative_url }})
 
 1. Remove the soft rubber on the back on both sides.
 2. Make left gimbal self centering (horizontally): with the controller lying on the front, using a 1.5mm hex wrench, on the right side: turn the L-R (red in picture) counter-clockwise (a fair bit, this allows for vertical stick tension) and turn the screw marked with up-down arrows clockwise (blue in picture) also a fair bit (this increases the vertical stick tension). 
@@ -76,7 +76,7 @@ The table shows the wiring (check the documentation of the receiver for its conn
 
 For the Happymodel EP1 Nano, this is the current wiring:
 
-![Wiring for the exact components used in this tutorial.]({{ "/assets/radio_controller/happymodel_ep1_to_bluepill_wiring.jpeg" | absolute_url }})
+![Wiring for the exact components used in this tutorial.]({{ "/assets/radio_controller/happymodel_ep1_to_bluepill_wiring.jpeg" | relative_url }})
 
 ### Binding the Receiver to the Controller
 
@@ -96,7 +96,7 @@ For the Happymodel EP1 Nano, this is the current wiring:
 
 #### Using ST-LINK
 
-![Jumper positions for programming and operating mode.]({{ "/assets/radio_controller/STM32-Operating-and-Programming-Mode.jpg" | absolute_url }})
+![Jumper positions for programming and operating mode.]({{ "/assets/radio_controller/STM32-Operating-and-Programming-Mode.jpg" | relative_url }})
 
 1. Put the STM32F103C8 in programming mode: move the BOOT0 jumper to the 1 position (see picture above).
 2. Install STM32CubeProgrammer
@@ -104,7 +104,7 @@ For the Happymodel EP1 Nano, this is the current wiring:
 4. In the [STM32CubeProgrammer](https://www.st.com/en/development-tools/stm32cubeprog.html) make sure the STM32 is connected, select the firmware file, select full chip erase and start programming the board (refer to screenshot below).
 5. Put the STM32F103C8 in operating mode: move the BOOT0 jumper back to the 0 position (see picture from step 1).
 
-![Screenshot of STM32CubeProgrammer to flash the firmware on the chip.]({{ "/assets/radio_controller/stlink_programming.png" | absolute_url }})
+![Screenshot of STM32CubeProgrammer to flash the firmware on the chip.]({{ "/assets/radio_controller/stlink_programming.png" | relative_url }})
 
 #### Using an FTDI adapter
 
@@ -117,7 +117,7 @@ For the Happymodel EP1 Nano, this is the current wiring:
 7. Click 'Download to Device', choose our firmware binaries in the 'Download from file' textbox, check 'Erase necessary pages' and click next.
 8. After successfully flashing, put the STM32F103C8 back into operating mode: move the BOOT0 jumper back to the 0 position (see picture at Using ST-LINK, step 1 above).
 
-![Screenshot of STM32CubeProgrammer to flash the firmware on the chip.]({{ "/assets/radio_controller/flash_loader_demonstrator.png" | absolute_url }})
+![Screenshot of STM32CubeProgrammer to flash the firmware on the chip.]({{ "/assets/radio_controller/flash_loader_demonstrator.png" | relative_url }})
 
 ### Testing the Functionality
 
